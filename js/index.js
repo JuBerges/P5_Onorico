@@ -12,7 +12,7 @@ let furName = document.getElementById('furName');
 let furDes = document.getElementById('furDes');
 let furPrice = document.getElementById('furPrice');
 
-//functions for fetch request
+//functions for fetch request "à simplifier"
 async function askTed() {
   let promise = await fetch("http://localhost:3000/api/teddies")
   let response = await promise.json()
@@ -33,7 +33,7 @@ async function askCam() {
     let result = num / 100
     return Math.round(result).toFixed(2)+" €"
   };  
-
+//functions for fetch request
   askTed().then(function(response) {
     tedImg.src = response[0].imageUrl
     tedName.innerHTML = response[0].name
