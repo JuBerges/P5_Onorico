@@ -9,7 +9,7 @@ let furImg = document.getElementById('furImg');
 let furName = document.getElementById('furName');
 let furDes = document.getElementById('furDes');
 
-//function for request
+//functions for fetch request
 async function askTed() {
   let promise = await fetch("http://localhost:3000/api/teddies")
   let response = await promise.json()
