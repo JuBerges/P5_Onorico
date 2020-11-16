@@ -1,33 +1,21 @@
-
+//teddies
 let tedImg = document.getElementById('tedImg');
 let tedName = document.getElementById('tedName');
 let tedDes = document.getElementById('tedDes');
 let tedPrice = document.getElementById('tedPrice');
-let camImg = document.getElementById('camImg');
-let camName = document.getElementById('camName');
-let camDes = document.getElementById('camDes');
-let camPrice = document.getElementById('camPrice');
-let furImg = document.getElementById('furImg');
-let furName = document.getElementById('furName');
-let furDes = document.getElementById('furDes');
-let furPrice = document.getElementById('furPrice');
+//Item page
+let itemImg = document.getElementById('itemImg');
+let itemName = document.getElementById('itemName');
+let itemId = document.getElementById('itemId');
+let itemDes = document.getElementById('itemDes');
+let itemPrice = document.getElementById('itemPrice');
 
-//functions for fetch request "à simplifier"
+//functions for fetch request "à simplifier?"
 async function askTed() {
   let promise = await fetch("http://localhost:3000/api/teddies")
   let response = await promise.json()
   return response
 }
-async function askCam() {
-    let promise = await fetch("http://localhost:3000/api/cameras")
-    let response = await promise.json()
-    return response
-  }
-  async function askFur() {
-    let promise = await fetch("http://localhost:3000/api/furniture")
-    let response = await promise.json()
-    return response
-  }
 //fonction pour convertir le prix
   function convertCents(num) {
     let result = num / 100
@@ -35,20 +23,32 @@ async function askCam() {
   };  
 //functions for fetch request
   askTed().then(function(response) {
-    tedImg.src = response[0].imageUrl
-    tedName.innerHTML = response[0].name
-    tedDes.innerHTML = response[0].description
-    tedPrice.innerText = convertCents(response[0].price);
+    tedImg1.src = response[0].imageUrl
+    tedName1.innerHTML = response[0].name
+    tedDes1.innerHTML = response[0].description
+    tedPrice1.innerText = convertCents(response[0].price)
+
+    tedImg2.src = response[1].imageUrl
+    tedName2.innerHTML = response[1].name
+    tedDes2.innerHTML = response[1].description
+    tedPrice2.innerText = convertCents(response[1].price)
+
+    tedImg3.src = response[2].imageUrl
+    tedName3.innerHTML = response[2].name
+    tedDes3.innerHTML = response[2].description
+    tedPrice3.innerText = convertCents(response[2].price)
+
+    tedImg4.src = response[3].imageUrl
+    tedName4.innerHTML = response[3].name
+    tedDes4.innerHTML = response[3].description
+    tedPrice4.innerText = convertCents(response[3].price)
+
+    tedImg5.src = response[4].imageUrl
+    tedName5.innerHTML = response[4].name
+    tedDes5.innerHTML = response[4].description
+    tedPrice5.innerText = convertCents(response[4].price)
   });
-  askCam().then(function(response) {
-    camImg.src = response[0].imageUrl
-    camName.innerHTML = response[0].name
-    camDes.innerHTML = response[0].description
-    camPrice.innerText = convertCents(response[0].price) 
-  });
-  askFur().then(function(response) {
-    furImg.src = response[0].imageUrl
-    furName.innerHTML = response[0].name
-    furDes.innerHTML = response[0].description  
-    furPrice.innerText = convertCents(response[0].price)
-  });
+
+//======================================================
+//For item page
+
