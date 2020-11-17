@@ -40,7 +40,7 @@ function createHtmlForProduct(product) {
   cardBody.appendChild(link);
   card.appendChild(cardBody);
   container.appendChild(card);
-  document.querySelector("#prod").appendChild(container);
+  document.getElementById("prod").appendChild(container);
 }
 
 //fetch index infos
