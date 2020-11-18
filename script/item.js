@@ -31,9 +31,22 @@ function createHtmlForProduct(product) {
   cardBody.appendChild(des);
 
   let lensesText = document.createElement("h3");
-  lensesText.classList.add("card-text");
+  lensesText.classList.add("card-text", "ml-1");
   lensesText.textContent = "Choisissez votre lentille : ";
   cardBody.appendChild(lensesText);
+
+  product.lenses.forEach((optic, i) => {
+    let lenseChoice = document.createElement("button");
+    lenseChoice.classList.add(
+      "btn",
+      "btn-primary",
+      "m-1",
+      "float-left",
+      "btn-sm"
+    );
+    (lenseChoice.textContent = optic), i;
+    cardBody.appendChild(lenseChoice);
+  });
 
   let euroPrice = document.createElement("button");
   euroPrice.classList.add("btn", "btn-primary", "m-1", "float-right");
