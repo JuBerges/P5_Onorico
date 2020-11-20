@@ -1,5 +1,5 @@
 let item = sessionStorage.getItem("id");
-console.log(item);
+
 async function askCam() {
   let promise = await fetch("http://localhost:3000/api/cameras/" + item);
   let response = await promise.json();
@@ -31,21 +31,18 @@ function createHtmlForProduct(product) {
   cardBody.appendChild(des);
 
   let lensesText = document.createElement("h3");
-  lensesText.classList.add("card-text", "ml-1");
+  lensesText.classList.add("card-text", "h6");
   lensesText.textContent = "Choisissez votre lentille : ";
   cardBody.appendChild(lensesText);
 
-  product.lenses.forEach((optic, i) => {
-    let lenseChoice = document.createElement("button");
-    lenseChoice.classList.add(
-      "btn",
-      "btn-primary",
-      "m-1",
-      "float-left",
-      "btn-sm"
-    );
-    (lenseChoice.textContent = optic), i;
-    cardBody.appendChild(lenseChoice);
+  let selector = document.createElement("select");
+  selector.classList.add("selectpicker");
+  cardBody.appendChild(selector);
+  //boucle pour lentilles
+  product.lenses.forEach((elt, i) => {
+    let lenseChoice = document.createElement("option");
+    (lenseChoice.textContent = elt), i;
+    selector.appendChild(lenseChoice);
   });
 
   let euroPrice = document.createElement("button");
@@ -75,3 +72,10 @@ function createHtmlForProduct(product) {
 askCam().then(function (response) {
   createHtmlForProduct(response);
 });
+
+//=============================ici=============================
+let selectItem = document.getElementsByClassName("selectpicker").selectIndex;
+let opt = document.getElementsByTagName("option");
+
+console.log(selectItem.opt.value);
+//=============================================================
