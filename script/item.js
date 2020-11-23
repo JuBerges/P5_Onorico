@@ -69,11 +69,28 @@ function createHtmlForProduct(product) {
   cardBody.appendChild(addToCart);
   //====================ICI=========================
   addToCart.addEventListener("click", function () {
-    let cartContentOnPage = [sessionStorage.getItem("cartContent")];
-    cartContentOnPage.push(
-      sessionStorage.getItem("id") + "/" + sessionStorage.getItem("lens")
-    );
-    sessionStorage.setItem("cartContent", cartContentOnPage);
+    //fonction qui ajoute les articles dans le panier à cartContent dans sessionStorage
+    let cartContentOnPage = sessionStorage.getItem("cartContent");
+    let obj =
+      "{" +
+      "id:" +
+      sessionStorage.getItem("id") +
+      "," +
+      "lens:" +
+      sessionStorage.getItem("lens") +
+      "}";
+    if (cartContentOnPage) {
+      cartContentOnPage = [sessionStorage.getItem("cartContent")];
+      cartContentOnPage.push(obj);
+      sessionStorage.setItem("cartContent", cartContentOnPage);
+    } else {
+      cartContentOnPage = [];
+      cartContentOnPage.push(obj);
+      cartContentOnPage = sessionStorage.setItem(
+        "cartContent",
+        cartContentOnPage
+      );
+    }
   });
   //=================================================
   let img = document.createElement("img");
