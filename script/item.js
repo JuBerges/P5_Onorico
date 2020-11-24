@@ -1,12 +1,21 @@
 let item = sessionStorage.getItem("id");
 async function askCam() {
-  let promise = await fetch("http://localhost:3000/api/cameras/" + item);
+  let promise = await fetch(
+    "http://localhost:3000/api/cameras/" + JSON.parse(item)
+  );
   let response = await promise.json();
   return response;
 }
 function convertCents(num) {
   let result = num / 100;
   return Math.round(result).toFixed(2) + " €";
+}
+function saveCart() {
+  sessionStorage.setItem("cartContent", JSON.stringify(cart));
+}
+// Load cart
+function loadCart() {
+  cart = JSON.parse(sessionStorage.getItem("cartContent"));
 }
 //========Renvoi l'option choisie du select
 function lensChoose(elt) {
@@ -69,29 +78,21 @@ function createHtmlForProduct(product) {
   cardBody.appendChild(addToCart);
   //====================ICI=========================
   addToCart.addEventListener("click", function () {
+    cart = [];
     //fonction qui ajoute les articles dans le panier à cartContent dans sessionStorage
-    let cartContentOnPage = sessionStorage.getItem("cartContent");
-    let obj =
-      "{" +
-      "id:" +
-      sessionStorage.getItem("id") +
-      "," +
-      "lens:" +
-      sessionStorage.getItem("lens") +
-      "}";
-    if (cartContentOnPage) {
-      cartContentOnPage = [sessionStorage.getItem("cartContent")];
-      cartContentOnPage.push(obj);
-      sessionStorage.setItem("cartContent", cartContentOnPage);
+    let obj = {};
+    obj.id = sessionStorage.getItem("id");
+    obj.lens = sessionStorage.getItem("lens");
+    if (sessionStorage.getItem("cartContent") != null) {
+      loadCart();
+      cart.push(obj);
+      saveCart();
     } else {
-      cartContentOnPage = [];
-      cartContentOnPage.push(obj);
-      cartContentOnPage = sessionStorage.setItem(
-        "cartContent",
-        cartContentOnPage
-      );
+      cart.push(obj);
+      saveCart();
     }
   });
+
   //=================================================
   let img = document.createElement("img");
   img.classList.add("card-img-top");

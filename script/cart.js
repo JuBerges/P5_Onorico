@@ -3,7 +3,7 @@ let emptyCart = document.getElementById("emptyCart");
 emptyCart.addEventListener("click", function () {
   sessionStorage.removeItem("cartContent");
 });
-console.log(cartLog, cartLog.lenght);
+console.log(cartLog);
 function getItemIdInStorage() {}
 async function askCam() {
   let promise = await fetch("http://localhost:3000/api/cameras");

@@ -34,7 +34,7 @@ function createHtmlForProduct(product) {
   link.role = "button";
   link.href = "item.html";
   link.addEventListener("click", function () {
-    sessionStorage.setItem("id", product._id);
+    sessionStorage.setItem("id", JSON.stringify(product._id));
   });
   link.textContent = convertCents(product.price);
   cardBody.appendChild(link);
