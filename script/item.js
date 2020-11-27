@@ -36,6 +36,7 @@ function createHtmlForProduct(product) {
   let title = document.createElement("h2");
   title.classList.add("h1");
   title.textContent = product.name;
+  sessionStorage.setItem("name", product.name);
   cardBody.appendChild(title);
 
   let des = document.createElement("p");
@@ -68,6 +69,7 @@ function createHtmlForProduct(product) {
   let euroPrice = document.createElement("button");
   euroPrice.classList.add("btn", "btn-primary", "m-1", "float-right");
   euroPrice.textContent = convertCents(product.price);
+  sessionStorage.setItem("price", convertCents(product.price));
   euroPrice.disabled = true;
   cardBody.appendChild(euroPrice);
 
@@ -76,16 +78,36 @@ function createHtmlForProduct(product) {
   addToCart.role = "button";
   addToCart.textContent = "Ajouter au panier";
   cardBody.appendChild(addToCart);
+
+  let img = document.createElement("img");
+  img.classList.add("card-img-top");
+  img.alt = product.name;
+  img.src = product.imageUrl;
+  sessionStorage.setItem("img", product.imageUrl);
+  cardBody.appendChild(img);
   //====================ICI=========================
   addToCart.addEventListener("click", function () {
     cart = [];
     //fonction qui ajoute les articles dans le panier à cartContent dans sessionStorage
     let obj = {};
-    obj.id = sessionStorage.getItem("id");
+    obj.name = sessionStorage.getItem("name");
     obj.lens = sessionStorage.getItem("lens");
+    obj.price = sessionStorage.getItem("price");
+    obj.img = sessionStorage.getItem("img");
+    obj.quantity = 1;
     if (sessionStorage.getItem("cartContent") != null) {
       loadCart();
-      cart.push(obj);
+      let found = false;
+      for (elt of cart) {
+        if (elt.id === obj.id && elt.lens === obj.lens) {
+          elt.quantity++;
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        cart.push(obj);
+      }
       saveCart();
     } else {
       cart.push(obj);
@@ -94,12 +116,6 @@ function createHtmlForProduct(product) {
   });
 
   //=================================================
-  let img = document.createElement("img");
-  img.classList.add("card-img-top");
-  img.alt = product.name;
-  img.src = product.imageUrl;
-  cardBody.appendChild(img);
-
   card.appendChild(cardBody);
   container.appendChild(card);
   document.getElementById("prod").appendChild(container);
