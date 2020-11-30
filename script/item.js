@@ -85,10 +85,9 @@ function createHtmlForProduct(product) {
   img.src = product.imageUrl;
   sessionStorage.setItem("img", product.imageUrl);
   cardBody.appendChild(img);
-  //====================ICI=========================
+  //Click Listener for add to cart btn
   addToCart.addEventListener("click", function () {
     cart = [];
-    //fonction qui ajoute les articles dans le panier à cartContent dans sessionStorage
     let obj = {};
     obj.name = sessionStorage.getItem("name");
     obj.lens = sessionStorage.getItem("lens");
@@ -114,8 +113,6 @@ function createHtmlForProduct(product) {
       saveCart();
     }
   });
-
-  //=================================================
   card.appendChild(cardBody);
   container.appendChild(card);
   document.getElementById("prod").appendChild(container);

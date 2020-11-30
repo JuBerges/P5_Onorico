@@ -14,23 +14,41 @@ function checkCart() {
     return cartFilled;
   }
 }
+
 function createHtmlForCart(product) {
-  let title = document.createElement("h2");
-  title.textContent = product.name;
+  let tbody = document.getElementById("prod");
+  let prodRow = document.createElement("tr");
 
-  let lensName = document.createElement("h3");
-  lensName.textContent = product.lens;
+  let tdName = document.createElement("td");
+  tdName.textContent = product.name;
+  prodRow.appendChild(tdName);
 
-  let itemPrice = document.createElement("h4");
-  itemPrice.textContent = product.price;
+  let tdLens = document.createElement("td");
+  tdLens.textContent = product.lens;
+  prodRow.appendChild(tdLens);
 
-  let quantity = document.createElement("h4");
-  quantity.textContent = product.quantity;
+  let tdPriceUnit = document.createElement("td");
+  tdPriceUnit.textContent = product.price;
+  prodRow.appendChild(tdPriceUnit);
 
-  document.getElementById("prod").appendChild(title);
-  document.getElementById("prod").appendChild(lensName);
-  document.getElementById("prod").appendChild(itemPrice);
-  document.getElementById("prod").appendChild(quantity);
+  let tdQuantity = document.createElement("td");
+  tdQuantity.textContent = product.quantity;
+  prodRow.appendChild(tdQuantity);
+
+  let tdPrice = document.createElement("td");
+  tdPrice.textContent =
+    product.price.substring(0, product.price.length - 1) * product.quantity +
+    "€";
+  prodRow.appendChild(tdPrice);
+
+  tbody.appendChild(prodRow);
+
+  //============================================================
+  //FAIRE UN TABLE POUR LE PANIER
+  //avec nom/lentilles/prix unitaire/ quantité/ prix total
+  //boutons plus et moins pour quantité
+  //prix total de tout en dessous
+  //============================================================
 }
 checkCart();
 
