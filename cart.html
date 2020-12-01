@@ -48,14 +48,16 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <h1 id="cartStatus" class="h3">Contenu de votre panier :</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 id="cartStatus" class="h3">Contenu de votre panier :</h1>
+        </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
-        <table class="table">
+        <table id="table" class="table table-striped">
           <thead>
             <tr>
               <th scope="col">Nom</th>
@@ -70,17 +72,91 @@
       </div>
     </div>
 
-    <!--Row pour les boutons de commande-->
-    <div class="row">
-      <div class="col-6">
-        <a class="btn btn-primary" href="./order.html" role="button"
-          >Commander</a
-        >
-        <a id="emptyCart" href="#" class="btn btn-danger">Vider le panier</a>
+    <!--Container pour le bouton 'vider le panier'-->
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <a id="emptyCart" href="#" class="btn btn-danger">Vider le panier</a>
+        </div>
+        <div class="col-6">
+          <h4 id="total"></h4>
+        </div>
       </div>
-      <div class="col-6">
-        <h4 id="total"></h4>
-      </div>
+    </div>
+    <div class="container">
+      <form>
+        <div class="form-group">
+          <label for="lblfirstname">Prénom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstname"
+            aria-describedby="firstnameHelp"
+            placeholder="Prénom"
+            required
+          />
+          <small id="firstnameHelp" class="form-text text-muted"
+            >Entrer votre prénom</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="lbllastname">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastname"
+            aria-describedby="lastnameHelp"
+            placeholder="Nom"
+            required
+          />
+          <small id="lastnameHelp" class="form-text text-muted"
+            >Entrer votre Nom</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="adr"> Adresse</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastname"
+            aria-describedby="addressHelp"
+            placeholder="404 rue Perdue"
+            required
+          />
+          <small id="addressHelp" class="form-text text-muted"
+            >Entrer votre Adresse</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="city">Ville</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            aria-describedby="cityHelp"
+            name="city"
+            placeholder="Paris"
+          />
+          <small id="cityHelp" class="form-text text-muted"
+            >Entrer votre Adresse</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Adresse e-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="e-mail"
+            required
+          />
+          <small id="emailHelp" class="form-text text-muted"
+            >Entrer votre adresse e-mail</small
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Commander</button>
+      </form>
     </div>
 
     <div class="bg-dark">

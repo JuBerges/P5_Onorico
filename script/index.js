@@ -10,7 +10,7 @@ function convertCents(num) {
 }
 
 //fonction pour créer les élements de produits dynamiquement
-function createHtmlForProduct(product) {
+const createHtmlForProduct = (product) => {
   let container = document.createElement("div");
   container.classList.add("col-12", "col-lg-6");
   let card = document.createElement("div");
@@ -41,7 +41,7 @@ function createHtmlForProduct(product) {
   card.appendChild(cardBody);
   container.appendChild(card);
   document.getElementById("prod").appendChild(container);
-}
+};
 
 //fetch index infos
 askCam().then(function (response) {

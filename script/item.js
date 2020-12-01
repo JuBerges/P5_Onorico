@@ -8,7 +8,7 @@ async function askCam() {
 }
 function convertCents(num) {
   let result = num / 100;
-  return Math.round(result).toFixed(2) + " €";
+  return Math.round(result);
 }
 function saveCart() {
   sessionStorage.setItem("cartContent", JSON.stringify(cart));
@@ -23,7 +23,7 @@ function lensChoose(elt) {
 }
 //=========================================
 //Crée les élements html du produit========
-function createHtmlForProduct(product) {
+const createHtmlForProduct = (product) => {
   let container = document.createElement("div");
   container.classList.add("col-12", "col-lg-8", "mx-auto");
 
@@ -60,7 +60,6 @@ function createHtmlForProduct(product) {
     selector.appendChild(lenseChoice);
   });
   //For lens sessionStorage
-  let lens = lensChoose(selector);
   sessionStorage.setItem("lens", lensChoose(selector));
   selector.addEventListener("change", function () {
     sessionStorage.setItem("lens", lensChoose(selector));
@@ -68,7 +67,7 @@ function createHtmlForProduct(product) {
 
   let euroPrice = document.createElement("button");
   euroPrice.classList.add("btn", "btn-primary", "m-1", "float-right");
-  euroPrice.textContent = convertCents(product.price);
+  euroPrice.textContent = convertCents(product.price) + " €";
   sessionStorage.setItem("price", convertCents(product.price));
   euroPrice.disabled = true;
   cardBody.appendChild(euroPrice);
@@ -89,10 +88,10 @@ function createHtmlForProduct(product) {
   addToCart.addEventListener("click", function () {
     cart = [];
     let obj = {};
+    obj.id = JSON.parse(item);
     obj.name = sessionStorage.getItem("name");
     obj.lens = sessionStorage.getItem("lens");
     obj.price = sessionStorage.getItem("price");
-    obj.img = sessionStorage.getItem("img");
     obj.quantity = 1;
     if (sessionStorage.getItem("cartContent") != null) {
       loadCart();
@@ -116,7 +115,7 @@ function createHtmlForProduct(product) {
   card.appendChild(cardBody);
   container.appendChild(card);
   document.getElementById("prod").appendChild(container);
-}
+};
 
 //fetch index infos
 askCam().then(function (response) {
