@@ -59,11 +59,11 @@ const createHtmlForCart = (product) => {
 
   let qtMinus = document.createElement("button");
   qtMinus.classList.add("btn", "btn-dark", "mx-1");
-  //qtMinus.dataset.productName = product.name;<==========================A VIRER
+  //qtMinus.dataset.productName = product.name;<==========================A VOIR
   qtMinus.textContent = "-";
   tdQuantity.appendChild(qtMinus);
   qtMinus.addEventListener("click", function (e) {
-    //let id = e.dataset.productName;<====================================A VIRER
+    //let id = e.dataset.productName;<====================================A VOIR
     if (product.quantity === 1) {
       qtMinus.title = "Supprimer l'article du panier";
       qtMinus.textContent = "X";
@@ -121,6 +121,9 @@ checkCart();
 let emptyCart = document.getElementById("emptyCart");
 emptyCart.addEventListener("click", function () {
   sessionStorage.removeItem("cartContent");
+  sessionStorage.removeItem("count");
+  cartCount.textContent = 0;
+  sessionStorage.clear();
   $("#prod").empty();
   $("#table").empty();
   $("#total").empty();
