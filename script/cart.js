@@ -1,11 +1,21 @@
-let cart = JSON.parse(sessionStorage.getItem("cartContent"));
+//==============================================<=======ICI==QT================
+//VOIR POUR SOUMISSION FORM
+//VOIR RESPONSIVE ET MISE EN PAGE
+//PAGE COMFIRM A TERMINER
+//W3C CHECK!!!!!!!!!
+//VOIR LE TRUC DE TEST
+//==============================================================================
+//==============================================================================
 
+//========> Récup des articles dans sessionStorage
+let cart = JSON.parse(sessionStorage.getItem("cartContent"));
+//========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
 if (sessionStorage.getItem("count")) {
   cartCount.textContent = sessionStorage.getItem("count");
 }
+//========> Check et mise à jour du panier
 function checkCart() {
-  //<===================================================Check et mise à jour du panier
   if (!sessionStorage.getItem("cartContent")) {
     let cartEmpty = (document.getElementById("cartStatus").textContent =
       "Votre panier est vide");
@@ -23,8 +33,8 @@ function checkCart() {
     return cartFilled;
   }
 }
+//========> Calcul du total des articles
 const totalSum = () => {
-  //<=================================================Calcul du total des articles
   let total = 0;
   let sums = document.getElementsByClassName("total");
   for (sum of sums) {
@@ -35,8 +45,8 @@ const totalSum = () => {
   let sumOfAll = document.getElementById("total");
   sumOfAll.textContent = "Prix Total : " + total + " €";
 };
+//========> Créer le contenu du panier sur la page pour chaque article
 const createHtmlForCart = (product) => {
-  //<=================================================Créer le contenu du panier sur la page pour chaque article
   let tbody = document.getElementById("prod");
   let prodRow = document.createElement("tr");
 
@@ -107,17 +117,10 @@ const createHtmlForCart = (product) => {
   prodRow.appendChild(tdPrice);
 
   tbody.appendChild(prodRow);
-
-  //============================================================>>>>>   ___A___
-  //FAIRE TABLE POUR LE PANIER==>ok                             >>>>>>  _SUPPR_
-  //avec nom/lentilles/prix unitaire/ quantité/ prix total==>ok >>>>>>> ___A___
-  //boutons plus et moins pour quantité==>ok                    >>>>>>> __LA___
-  //prix total de tout en dessous==>ok                          >>>>>>  __FIN__
-  //============================================================>>>>>   __!!!__
 };
 checkCart();
 
-//====Empties the cart====
+//========> Vide le panier
 let emptyCart = document.getElementById("emptyCart");
 emptyCart.addEventListener("click", function () {
   sessionStorage.removeItem("cartContent");
@@ -131,7 +134,7 @@ emptyCart.addEventListener("click", function () {
   checkCart();
 });
 
-//====Sums of All products in cart====
+//========> Fait le total de tout les articles du panier
 if (cart) {
   totalSum();
 }

@@ -1,5 +1,4 @@
-let item = sessionStorage.getItem("id");
-
+//========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
 function saveCount() {
   sessionStorage.setItem("count", cartCount.textContent);
@@ -7,6 +6,8 @@ function saveCount() {
 if (sessionStorage.getItem("count")) {
   cartCount.textContent = sessionStorage.getItem("count");
 }
+//========> Fetch l'article dans l'api
+let item = sessionStorage.getItem("id");
 async function askCam() {
   let promise = await fetch(
     "http://localhost:3000/api/cameras/" + JSON.parse(item)
@@ -18,19 +19,19 @@ function convertCents(num) {
   let result = num / 100;
   return Math.round(result);
 }
+//========> Sauvegarde le panier dans sessionStorage
 function saveCart() {
   sessionStorage.setItem("cartContent", JSON.stringify(cart));
 }
-// Load cart
+//========> Récup le panier dans sessionStorage
 function loadCart() {
   cart = JSON.parse(sessionStorage.getItem("cartContent"));
 }
-//========Renvoi l'option choisie du select
+//========> Renvoi l'option choisie du select
 function lensChoose(elt) {
   return elt.options[elt.selectedIndex].value;
 }
-//=========================================
-//Crée les élements html du produit========
+//========> Crée les élements html du produit
 const createHtmlForProduct = (product) => {
   let container = document.createElement("div");
   container.classList.add("col-12", "col-lg-8", "mx-auto");
@@ -61,13 +62,13 @@ const createHtmlForProduct = (product) => {
   selector.id = "choices";
   selector.classList.add("selectpicker");
   cardBody.appendChild(selector);
-  //boucle pour lentilles
+  //========> boucle pour lentilles
   product.lenses.forEach((elt, i) => {
     let lenseChoice = document.createElement("option");
     (lenseChoice.textContent = elt), i;
     selector.appendChild(lenseChoice);
   });
-  //For lens sessionStorage
+  //========> Récup la lentille selectionnée dans sessionStorage
   sessionStorage.setItem("lens", lensChoose(selector));
   selector.addEventListener("change", function () {
     sessionStorage.setItem("lens", lensChoose(selector));
@@ -92,7 +93,7 @@ const createHtmlForProduct = (product) => {
   img.src = product.imageUrl;
   sessionStorage.setItem("img", product.imageUrl);
   cardBody.appendChild(img);
-  //Click Listener for add to cart btn
+  //========> Click Listener pour le bouton d'ajout au panier
   addToCart.addEventListener("click", function () {
     cart = [];
     let obj = {};
@@ -109,15 +110,6 @@ const createHtmlForProduct = (product) => {
       for (elt of cart) {
         if (elt.id === obj.id && elt.lens === obj.lens) {
           elt.quantity++;
-          //==============================================<=======ICI==QT================
-          //FINIR L'AFFICHAGE DES QTs (for cart[i] qts total++ in storage)
-          //VOIR POUR SOUMISSION FORM
-          //VOIR RESPONSIVE ET MISE EN PAGE
-          //PAGE COMFIRM A TERMINER
-          //W3C CHECK!!!!!!!!!
-          //VOIR LE TRUC DE TEST
-          //==============================================================================
-          //==============================================================================
           found = true;
           break;
         }
@@ -136,7 +128,7 @@ const createHtmlForProduct = (product) => {
   document.getElementById("prod").appendChild(container);
 };
 
-//fetch index infos
+//========> fetch l'article dans l'api
 askCam().then(function (response) {
   createHtmlForProduct(response);
 });

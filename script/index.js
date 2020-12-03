@@ -1,19 +1,21 @@
-//fetch request
+//========> fetch les articles dans l'api
 async function askCam() {
   let promise = await fetch("http://localhost:3000/api/cameras");
   let response = await promise.json();
   return response;
 }
+//========> Pour passer le prix de centimes à euro
 function convertCents(num) {
   let result = num / 100;
   return Math.round(result).toFixed(2) + " €";
 }
+//========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
 if (sessionStorage.getItem("count")) {
   cartCount.textContent = sessionStorage.getItem("count");
 }
 
-//fonction pour créer les élements de produits dynamiquement
+//========> fonction pour créer les élements de produits dynamiquement
 const createHtmlForProduct = (product) => {
   let container = document.createElement("div");
   container.classList.add("col-12", "col-lg-6");
@@ -47,7 +49,7 @@ const createHtmlForProduct = (product) => {
   document.getElementById("prod").appendChild(container);
 };
 
-//fetch index infos
+//========> fetch dans l'api pour chaque articles
 askCam().then(function (response) {
   response.forEach((product) => {
     createHtmlForProduct(product);
