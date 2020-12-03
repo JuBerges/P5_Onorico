@@ -40,7 +40,9 @@
                   <a class="nav-link" href="./index.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="./cart.html">Panier</a>
+                  <a class="nav-link active" href="./cart.html"
+                    >Panier (<span id="cart-count">0</span>)</a
+                  >
                 </li>
               </ul>
             </div>
@@ -84,79 +86,83 @@
       </div>
     </div>
     <div class="container">
-      <form>
-        <div class="form-group">
-          <label for="lblfirstname">Prénom</label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstname"
-            aria-describedby="firstnameHelp"
-            placeholder="Prénom"
-            required
-          />
-          <small id="firstnameHelp" class="form-text text-muted"
-            >Entrer votre prénom</small
-          >
+      <div class="row">
+        <div class="col-6">
+          <form>
+            <div class="form-group">
+              <label for="lblfirstname">Prénom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstname"
+                aria-describedby="firstnameHelp"
+                placeholder="Prénom"
+                required
+              />
+              <small id="firstnameHelp" class="form-text text-muted"
+                >Entrer votre prénom</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="lbllastname">Nom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastname"
+                aria-describedby="lastnameHelp"
+                placeholder="Nom"
+                required
+              />
+              <small id="lastnameHelp" class="form-text text-muted"
+                >Entrer votre Nom</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="adr"> Adresse</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastname"
+                aria-describedby="addressHelp"
+                placeholder="404 rue Perdue"
+                required
+              />
+              <small id="addressHelp" class="form-text text-muted"
+                >Entrer votre Adresse</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="city">Ville</label>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                aria-describedby="cityHelp"
+                name="city"
+                placeholder="Paris"
+              />
+              <small id="cityHelp" class="form-text text-muted"
+                >Entrer votre Adresse</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Adresse e-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="e-mail"
+                required
+              />
+              <small id="emailHelp" class="form-text text-muted"
+                >Entrer votre adresse e-mail</small
+              >
+            </div>
+            <button type="submit" class="btn btn-primary">Commander</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="lbllastname">Nom</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastname"
-            aria-describedby="lastnameHelp"
-            placeholder="Nom"
-            required
-          />
-          <small id="lastnameHelp" class="form-text text-muted"
-            >Entrer votre Nom</small
-          >
-        </div>
-        <div class="form-group">
-          <label for="adr"> Adresse</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastname"
-            aria-describedby="addressHelp"
-            placeholder="404 rue Perdue"
-            required
-          />
-          <small id="addressHelp" class="form-text text-muted"
-            >Entrer votre Adresse</small
-          >
-        </div>
-        <div class="form-group">
-          <label for="city">Ville</label>
-          <input
-            type="text"
-            class="form-control"
-            id="city"
-            aria-describedby="cityHelp"
-            name="city"
-            placeholder="Paris"
-          />
-          <small id="cityHelp" class="form-text text-muted"
-            >Entrer votre Adresse</small
-          >
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Adresse e-mail</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="e-mail"
-            required
-          />
-          <small id="emailHelp" class="form-text text-muted"
-            >Entrer votre adresse e-mail</small
-          >
-        </div>
-        <button type="submit" class="btn btn-primary">Commander</button>
-      </form>
+      </div>
     </div>
 
     <div class="bg-dark">

@@ -1,5 +1,9 @@
 let cart = JSON.parse(sessionStorage.getItem("cartContent"));
 
+let cartCount = document.getElementById("cart-count");
+if (sessionStorage.getItem("count")) {
+  cartCount.textContent = sessionStorage.getItem("count");
+}
 function checkCart() {
   //<===================================================Check et mise à jour du panier
   if (!sessionStorage.getItem("cartContent")) {
@@ -60,13 +64,19 @@ const createHtmlForCart = (product) => {
   tdQuantity.appendChild(qtMinus);
   qtMinus.addEventListener("click", function (e) {
     //let id = e.dataset.productName;<====================================A VIRER
+    if (product.quantity === 1) {
+      qtMinus.title = "Supprimer l'article du panier";
+      qtMinus.textContent = "X";
+      qtMinus.classList.remove("btn-dark");
+      qtMinus.classList.add("btn-danger");
+    }
     if (product.quantity > 0) {
       product.quantity--;
+      cartCount.textContent--;
       tdPrice.textContent = product.price * product.quantity + " €";
       spanQuantity.textContent = product.quantity;
       totalSum();
-    } else if (product.quantity < 1) {
-      qtMinus.textContent = "x";
+    } else {
       e.target.closest("tr").remove();
     }
   });
@@ -76,7 +86,14 @@ const createHtmlForCart = (product) => {
   qtPlus.textContent = "+";
   tdQuantity.appendChild(qtPlus);
   qtPlus.addEventListener("click", function () {
+    if (product.quantity === 0) {
+      qtMinus.classList.remove("btn-danger");
+      qtMinus.classList.add("btn-dark");
+      qtMinus.title = "";
+      qtMinus.textContent = "-";
+    }
     product.quantity++;
+    cartCount.textContent++;
     spanQuantity.textContent = product.quantity;
     tdPrice.textContent = product.price * product.quantity + " €";
     totalSum();

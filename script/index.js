@@ -8,6 +8,10 @@ function convertCents(num) {
   let result = num / 100;
   return Math.round(result).toFixed(2) + " €";
 }
+let cartCount = document.getElementById("cart-count");
+if (sessionStorage.getItem("count")) {
+  cartCount.textContent = sessionStorage.getItem("count");
+}
 
 //fonction pour créer les élements de produits dynamiquement
 const createHtmlForProduct = (product) => {

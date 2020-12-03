@@ -1,4 +1,12 @@
 let item = sessionStorage.getItem("id");
+
+let cartCount = document.getElementById("cart-count");
+function saveCount() {
+  sessionStorage.setItem("count", cartCount.textContent);
+}
+if (sessionStorage.getItem("count")) {
+  cartCount.textContent = sessionStorage.getItem("count");
+}
 async function askCam() {
   let promise = await fetch(
     "http://localhost:3000/api/cameras/" + JSON.parse(item)
@@ -93,12 +101,23 @@ const createHtmlForProduct = (product) => {
     obj.lens = sessionStorage.getItem("lens");
     obj.price = sessionStorage.getItem("price");
     obj.quantity = 1;
+    cartCount.textContent++;
+    saveCount();
     if (sessionStorage.getItem("cartContent") != null) {
       loadCart();
       let found = false;
       for (elt of cart) {
         if (elt.id === obj.id && elt.lens === obj.lens) {
           elt.quantity++;
+          //==============================================<=======ICI==QT================
+          //FINIR L'AFFICHAGE DES QTs (for cart[i] qts total++ in storage)
+          //VOIR POUR SOUMISSION FORM
+          //VOIR RESPONSIVE ET MISE EN PAGE
+          //PAGE COMFIRM A TERMINER
+          //W3C CHECK!!!!!!!!!
+          //VOIR LE TRUC DE TEST
+          //==============================================================================
+          //==============================================================================
           found = true;
           break;
         }
