@@ -23,6 +23,24 @@
         <div class="row">
           <nav class="col navbar navbar-expand-md navbar-dark">
             <a class="navbar-brand" href="index.html"> ONORICO </a>
+            <a class="d-md-none mr-0" href="./cart.html"
+              ><svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-basket3-fill"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172z"
+                />
+                <path
+                  d="M2.468 15.426L.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"
+                /></svg
+              >(<span id="cart-count-min">0</span>)</a
+            >
             <button
               class="navbar-toggler"
               type="button"
@@ -58,7 +76,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="row">
+      <div class="row table-responsive">
         <table id="table" class="table table-striped">
           <thead>
             <tr>
@@ -78,88 +96,92 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <a id="emptyCart" href="#" class="btn btn-danger">Vider le panier</a>
+          <a
+            id="emptyCart"
+            href="#"
+            class="float-left btn btn-danger btn-sm mb-3"
+            >Vider le panier</a
+          >
         </div>
         <div class="col-6">
-          <h4 id="total"></h4>
+          <h4 id="total" class="float-right"></h4>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-6">
-          <form>
-            <div class="form-group">
-              <label for="lblfirstname">Prénom</label>
-              <input
-                type="text"
-                class="form-control"
-                id="firstname"
-                aria-describedby="firstnameHelp"
-                placeholder="Prénom"
-                required
-              />
-              <small id="firstnameHelp" class="form-text text-muted"
-                >Entrer votre prénom</small
-              >
+        <div class="col-12">
+          <form class="needs-validation" novalidate>
+            <div class="form-row">
+              <div class="col-md-4 mb-3 md-form">
+                <label for="validationCustomFirstname">Prénom</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustomFirstname"
+                  placeholder="Prénom"
+                  maxlength="36"
+                  required
+                />
+                <div class="valid-feedback">Valide</div>
+              </div>
+
+              <div class="col-md-4 mb-3 md-form">
+                <label for="validationCustomLastname">Nom</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nom"
+                  id="validationCustomLastname"
+                  maxlength="36"
+                  required
+                />
+                <div class="valid-feedback">Valide</div>
+              </div>
+
+              <div class="col-md-4 mb-3 md-form">
+                <label for="validationCustomEmail">E-mail</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="E-mail"
+                  id="validationCustomEmail"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Entrer une adresse E-mail valide
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="lbllastname">Nom</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lastname"
-                aria-describedby="lastnameHelp"
-                placeholder="Nom"
-                required
-              />
-              <small id="lastnameHelp" class="form-text text-muted"
-                >Entrer votre Nom</small
-              >
+            <div class="form-row">
+              <div class="col-md-6 mb-3 md-form">
+                <label for="validationCustomAddress">Adresse</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Adresse"
+                  id="validationCustomAddress"
+                  required
+                />
+              </div>
+              <div class="col-md-4 mb-3 md-form">
+                <label for="validationCustomCity">Ville</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ville"
+                  id="validationCustomCity"
+                  required
+                />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="adr"> Adresse</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lastname"
-                aria-describedby="addressHelp"
-                placeholder="404 rue Perdue"
-                required
-              />
-              <small id="addressHelp" class="form-text text-muted"
-                >Entrer votre Adresse</small
-              >
-            </div>
-            <div class="form-group">
-              <label for="city">Ville</label>
-              <input
-                type="text"
-                class="form-control"
-                id="city"
-                aria-describedby="cityHelp"
-                name="city"
-                placeholder="Paris"
-              />
-              <small id="cityHelp" class="form-text text-muted"
-                >Entrer votre Adresse</small
-              >
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Adresse e-mail</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="e-mail"
-                required
-              />
-              <small id="emailHelp" class="form-text text-muted"
-                >Entrer votre adresse e-mail</small
-              >
-            </div>
-            <button type="submit" class="btn btn-primary">Commander</button>
+            <button
+              class="btn btn-primary btn-lg btn-rounded mb-3"
+              type="submit"
+              id="sub"
+            >
+              Commander
+            </button>
           </form>
         </div>
       </div>

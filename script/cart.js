@@ -1,9 +1,10 @@
 //==============================================<=======ICI==QT================
 //VOIR POUR SOUMISSION FORM
-//VOIR RESPONSIVE ET MISE EN PAGE
+//VIRER le Jquery !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //PAGE COMFIRM A TERMINER
+//VOIR RESPONSIVE ET MISE EN PAGE
 //W3C CHECK!!!!!!!!!
-//VOIR LE TRUC DE TEST
+//VOIR LE PLAN TEST
 //==============================================================================
 //==============================================================================
 
@@ -11,8 +12,10 @@
 let cart = JSON.parse(sessionStorage.getItem("cartContent"));
 //========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
+let cartCountMin = document.getElementById("cart-count-min");
 if (sessionStorage.getItem("count")) {
   cartCount.textContent = sessionStorage.getItem("count");
+  cartCountMin.textContent = sessionStorage.getItem("count");
 }
 //========> Check et mise à jour du panier
 function checkCart() {
@@ -68,7 +71,7 @@ const createHtmlForCart = (product) => {
   tdQuantity.appendChild(spanQuantity);
 
   let qtMinus = document.createElement("button");
-  qtMinus.classList.add("btn", "btn-dark", "mx-1");
+  qtMinus.classList.add("btn", "btn-sm", "btn-dark");
   //qtMinus.dataset.productName = product.name;<==========================A VOIR
   qtMinus.textContent = "-";
   tdQuantity.appendChild(qtMinus);
@@ -83,6 +86,7 @@ const createHtmlForCart = (product) => {
     if (product.quantity > 0) {
       product.quantity--;
       cartCount.textContent--;
+      cartCountMin.textContent--;
       tdPrice.textContent = product.price * product.quantity + " €";
       spanQuantity.textContent = product.quantity;
       totalSum();
@@ -92,7 +96,7 @@ const createHtmlForCart = (product) => {
   });
 
   let qtPlus = document.createElement("button");
-  qtPlus.classList.add("btn", "btn-dark");
+  qtPlus.classList.add("btn", "btn-sm", "btn-dark");
   qtPlus.textContent = "+";
   tdQuantity.appendChild(qtPlus);
   qtPlus.addEventListener("click", function () {
@@ -104,6 +108,7 @@ const createHtmlForCart = (product) => {
     }
     product.quantity++;
     cartCount.textContent++;
+    cartCountMin.textContent++;
     spanQuantity.textContent = product.quantity;
     tdPrice.textContent = product.price * product.quantity + " €";
     totalSum();
@@ -123,9 +128,8 @@ checkCart();
 //========> Vide le panier
 let emptyCart = document.getElementById("emptyCart");
 emptyCart.addEventListener("click", function () {
-  sessionStorage.removeItem("cartContent");
-  sessionStorage.removeItem("count");
   cartCount.textContent = 0;
+  cartCountMin.textContent = 0;
   sessionStorage.clear();
   $("#prod").empty();
   $("#table").empty();
@@ -138,3 +142,29 @@ emptyCart.addEventListener("click", function () {
 if (cart) {
   totalSum();
 }
+//========> Validation formulaire
+(function () {
+  "use strict";
+  window.addEventListener(
+    "load",
+    function () {
+      // Fetch all the forms
+      var forms = document.getElementsByClassName("needs-validation");
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      });
+    },
+    false
+  );
+})();

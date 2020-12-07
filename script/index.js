@@ -11,8 +11,10 @@ function convertCents(num) {
 }
 //========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
+let cartCountMin = document.getElementById("cart-count-min");
 if (sessionStorage.getItem("count")) {
   cartCount.textContent = sessionStorage.getItem("count");
+  cartCountMin.textContent = sessionStorage.getItem("count");
 }
 
 //========> fonction pour créer les élements de produits dynamiquement

@@ -1,10 +1,12 @@
 //========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
+let cartCountMin = document.getElementById("cart-count-min");
 function saveCount() {
   sessionStorage.setItem("count", cartCount.textContent);
 }
 if (sessionStorage.getItem("count")) {
   cartCount.textContent = sessionStorage.getItem("count");
+  cartCountMin.textContent = sessionStorage.getItem("count");
 }
 //========> Fetch l'article dans l'api
 let item = sessionStorage.getItem("id");
@@ -34,7 +36,7 @@ function lensChoose(elt) {
 //========> Crée les élements html du produit
 const createHtmlForProduct = (product) => {
   let container = document.createElement("div");
-  container.classList.add("col-12", "col-lg-8", "mx-auto");
+  container.classList.add("col");
 
   let card = document.createElement("div");
   card.classList.add("card", "shadow");
@@ -103,6 +105,7 @@ const createHtmlForProduct = (product) => {
     obj.price = sessionStorage.getItem("price");
     obj.quantity = 1;
     cartCount.textContent++;
+    cartCountMin.textContent++;
     saveCount();
     if (sessionStorage.getItem("cartContent") != null) {
       loadCart();
