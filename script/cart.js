@@ -1,12 +1,11 @@
 //==============================================<=======ICI==QT================
-//VIRER le Jquery !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//PAGE COMFIRM A TERMINER
 //VOIR RESPONSIVE ET MISE EN PAGE
 //W3C CHECK!!!!!!!!! ok pour le moment
 //VOIR LE PLAN TEST
 //COMMENTER LE TOUT
 //==============================================================================
 //==============================================================================
+
 //========> Stocke les ids produits pour post
 let products = [];
 //========> Récup des articles dans sessionStorage
@@ -24,10 +23,18 @@ function checkCart() {
     let cartEmpty = (document.getElementById("cartStatus").textContent =
       "Votre panier est vide");
     cart = null;
-    $("#prod").empty();
-    $("#table").empty();
-    $("#total").empty();
-    $("form").empty();
+    document
+      .getElementById("prod_container")
+      .removeChild(document.getElementById("table"));
+    document
+      .getElementById("total_container")
+      .removeChild(document.getElementById("total"));
+    document
+      .getElementById("form_container")
+      .removeChild(document.getElementById("form"));
+    document
+      .getElementById("emptycart_container")
+      .removeChild(document.getElementById("emptyCart"));
     return cartEmpty;
   } else {
     let cartFilled = cart.forEach((product) => {
@@ -71,13 +78,12 @@ const createHtmlForCart = (product) => {
   spanQuantity.textContent = product.quantity;
   tdQuantity.appendChild(spanQuantity);
 
+  //========> Pour diminuer la quantité
   let qtMinus = document.createElement("button");
   qtMinus.classList.add("btn", "btn-sm", "btn-dark");
-  //qtMinus.dataset.productName = product.name;<==========================A VOIR
   qtMinus.textContent = "-";
   tdQuantity.appendChild(qtMinus);
   qtMinus.addEventListener("click", function (e) {
-    //let id = e.dataset.productName;<====================================A VOIR
     if (product.quantity === 1) {
       qtMinus.title = "Supprimer l'article du panier";
       qtMinus.textContent = "X";
@@ -95,7 +101,7 @@ const createHtmlForCart = (product) => {
       e.target.closest("tr").remove();
     }
   });
-
+  //========> Pour augmenter la quantité
   let qtPlus = document.createElement("button");
   qtPlus.classList.add("btn", "btn-sm", "btn-dark");
   qtPlus.textContent = "+";
@@ -114,7 +120,6 @@ const createHtmlForCart = (product) => {
     tdPrice.textContent = product.price * product.quantity + " €";
     totalSum();
   });
-
   prodRow.appendChild(tdQuantity);
 
   let tdPrice = document.createElement("td");
@@ -132,10 +137,18 @@ emptyCart.addEventListener("click", function () {
   cartCount.textContent = 0;
   cartCountMin.textContent = 0;
   sessionStorage.clear();
-  $("#prod").empty();
-  $("#table").empty();
-  $("#total").empty();
-  $("form").empty();
+  document
+    .getElementById("prod_container")
+    .removeChild(document.getElementById("table"));
+  document
+    .getElementById("total_container")
+    .removeChild(document.getElementById("total"));
+  document
+    .getElementById("form_container")
+    .removeChild(document.getElementById("form"));
+  document
+    .getElementById("emptycart_container")
+    .removeChild(document.getElementById("emptyCart"));
   checkCart();
 });
 
@@ -176,9 +189,9 @@ window.addEventListener(
   },
   false
 );
-
 //========> fetch(post) le panier et formulaire validé
 async function submitOrder() {
+  //========> Crée l'objet contact pour post
   let contact = {
     firstName: document.getElementById("firstname").value,
     lastName: document.getElementById("lastname").value,
@@ -186,7 +199,6 @@ async function submitOrder() {
     city: document.getElementById("city").value,
     email: document.getElementById("email").value,
   };
-
   let options = {
     method: "POST",
     body: JSON.stringify({
@@ -202,16 +214,3 @@ async function submitOrder() {
   let response = await promise.json();
   return response;
 }
-/**
- *
- * Expects request to contain:
- * contact: {
- *   firstName: string,
- *   lastName: string,
- *   address: string,
- *   city: string,
- *   email: string
- * }
- * products: [string] <-- array of product _id
- *
- */
