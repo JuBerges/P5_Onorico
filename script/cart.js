@@ -1,13 +1,14 @@
 //==============================================<=======ICI==QT================
-//VOIR POUR SOUMISSION FORM
 //VIRER le Jquery !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //PAGE COMFIRM A TERMINER
 //VOIR RESPONSIVE ET MISE EN PAGE
-//W3C CHECK!!!!!!!!!
+//W3C CHECK!!!!!!!!! ok pour le moment
 //VOIR LE PLAN TEST
+//COMMENTER LE TOUT
 //==============================================================================
 //==============================================================================
-
+//========> Stocke les ids produits pour post
+let products = [];
 //========> Récup des articles dans sessionStorage
 let cart = JSON.parse(sessionStorage.getItem("cartContent"));
 //========> Compte des articles dans le panier sur le header
@@ -27,11 +28,11 @@ function checkCart() {
     $("#table").empty();
     $("#total").empty();
     $("form").empty();
-    console.log(cart);
     return cartEmpty;
   } else {
     let cartFilled = cart.forEach((product) => {
       createHtmlForCart(product);
+      products.push(product.id);
     });
     return cartFilled;
   }
@@ -143,28 +144,74 @@ if (cart) {
   totalSum();
 }
 //========> Validation formulaire
-(function () {
-  "use strict";
-  window.addEventListener(
-    "load",
-    function () {
-      // Fetch all the forms
-      var forms = document.getElementsByClassName("needs-validation");
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener(
-          "submit",
-          function (event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
+window.addEventListener(
+  "load",
+  function () {
+    // Fetch les forms
+    var forms = document.getElementsByClassName("needs-validation");
+    // Loop sur les forms et bloque submit
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault();
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            //========> Actions du btn commander
+            submitOrder().then(function (response) {
+              console.log(response);
+              sessionStorage.clear();
+              checkCart();
+              sessionStorage.setItem("orderRep", response.orderId);
+              document.location = "order.html";
+            });
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  },
+  false
+);
+
+//========> fetch(post) le panier et formulaire validé
+async function submitOrder() {
+  let contact = {
+    firstName: document.getElementById("firstname").value,
+    lastName: document.getElementById("lastname").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("city").value,
+    email: document.getElementById("email").value,
+  };
+
+  let options = {
+    method: "POST",
+    body: JSON.stringify({
+      contact: contact,
+      products: products,
+    }),
+    headers: {
+      "Content-Type": "application/json",
     },
-    false
-  );
-})();
+    mode: "cors",
+  };
+  let promise = await fetch("http://localhost:3000/api/cameras/order", options);
+  let response = await promise.json();
+  return response;
+}
+/**
+ *
+ * Expects request to contain:
+ * contact: {
+ *   firstName: string,
+ *   lastName: string,
+ *   address: string,
+ *   city: string,
+ *   email: string
+ * }
+ * products: [string] <-- array of product _id
+ *
+ */

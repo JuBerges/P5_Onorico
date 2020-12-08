@@ -1,3 +1,4 @@
+sessionStorage.removeItem("orderRep");
 //========> fetch les articles dans l'api
 async function askCam() {
   let promise = await fetch("http://localhost:3000/api/cameras");

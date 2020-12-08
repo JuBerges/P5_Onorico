@@ -46,8 +46,6 @@
               type="button"
               data-toggle="collapse"
               data-target="#navbarContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
               aria-label="Toggle navigation"
             >
               <span class="navbar-toggler-icon"></span>
@@ -104,73 +102,74 @@
           >
         </div>
         <div class="col-6">
-          <h4 id="total" class="float-right"></h4>
+          <h4 id="total" class="float-right">0 €</h4>
         </div>
       </div>
     </div>
+    <!--Container du formulaire-->
     <div class="container">
       <div class="row">
         <div class="col-12">
           <form class="needs-validation" novalidate>
             <div class="form-row">
               <div class="col-md-4 mb-3 md-form">
-                <label for="validationCustomFirstname">Prénom</label>
+                <label for="firstname">Prénom</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="validationCustomFirstname"
+                  id="firstname"
                   placeholder="Prénom"
+                  pattern="[A-Za-z ]{2,}"
                   maxlength="36"
                   required
                 />
-                <div class="valid-feedback">Valide</div>
+                <div class="invalid-feedback">Entrez votre prénom valide</div>
               </div>
 
               <div class="col-md-4 mb-3 md-form">
-                <label for="validationCustomLastname">Nom</label>
+                <label for="lastname">Nom</label>
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Nom"
-                  id="validationCustomLastname"
+                  pattern="[A-Za-z ]{2,}"
+                  id="lastname"
                   maxlength="36"
                   required
                 />
-                <div class="valid-feedback">Valide</div>
+                <div class="invalid-feedback">Entrez votre nom valide</div>
               </div>
 
               <div class="col-md-4 mb-3 md-form">
-                <label for="validationCustomEmail">E-mail</label>
+                <label for="email">E-mail</label>
                 <input
                   type="email"
                   class="form-control"
                   placeholder="E-mail"
-                  id="validationCustomEmail"
+                  id="email"
                   required
                 />
-                <div class="invalid-feedback">
-                  Entrer une adresse E-mail valide
-                </div>
+                <div class="invalid-feedback">Entrez une adresse E-mail</div>
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-3 md-form">
-                <label for="validationCustomAddress">Adresse</label>
+                <label for="address">Adresse</label>
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Adresse"
-                  id="validationCustomAddress"
+                  id="address"
                   required
                 />
               </div>
               <div class="col-md-4 mb-3 md-form">
-                <label for="validationCustomCity">Ville</label>
+                <label for="city">Ville</label>
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Ville"
-                  id="validationCustomCity"
+                  id="city"
                   required
                 />
               </div>
