@@ -10,13 +10,16 @@ function convertCents(num) {
   let result = num / 100;
   return Math.round(result).toFixed(2) + " €";
 }
-//========> Compte des articles dans le panier sur le header
-let cartCount = document.getElementById("cart-count");
-let cartCountMin = document.getElementById("cart-count-min");
-if (sessionStorage.getItem("count")) {
-  cartCount.textContent = sessionStorage.getItem("count");
-  cartCountMin.textContent = sessionStorage.getItem("count");
+//========> Compte les articles dans le panier et les affiche sur le header
+function countArticleInCart() {
+  let cartCount = document.getElementById("cart-count");
+  let cartCountMin = document.getElementById("cart-count-min");
+  if (sessionStorage.getItem("count")) {
+    cartCount.textContent = sessionStorage.getItem("count");
+    cartCountMin.textContent = sessionStorage.getItem("count");
+  }
 }
+countArticleInCart();
 
 //========> fonction pour créer les élements de produits dynamiquement
 const createHtmlForProduct = (product) => {
@@ -52,9 +55,12 @@ const createHtmlForProduct = (product) => {
   document.getElementById("prod").appendChild(container);
 };
 
-//========> fetch dans l'api pour chaque articles
-askCam().then(function (response) {
-  response.forEach((product) => {
-    createHtmlForProduct(product);
+//========> fetch et créer l'html pour chaque articles
+function askAndCreate() {
+  askCam().then(function (response) {
+    response.forEach((product) => {
+      createHtmlForProduct(product);
+    });
   });
-});
+}
+askAndCreate();

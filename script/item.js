@@ -4,20 +4,24 @@ let cartCountMin = document.getElementById("cart-count-min");
 function saveCount() {
   sessionStorage.setItem("count", cartCount.textContent);
 }
-if (sessionStorage.getItem("count")) {
-  cartCount.textContent = sessionStorage.getItem("count");
-  cartCountMin.textContent = sessionStorage.getItem("count");
+function checkCartCount() {
+  if (sessionStorage.getItem("count")) {
+    cartCount.textContent = sessionStorage.getItem("count");
+    cartCountMin.textContent = sessionStorage.getItem("count");
+  }
 }
+checkCartCount();
+
 //========> Fetch l'article dans l'api
 let item = sessionStorage.getItem("id");
-async function askCam() {
+async function askCamItem() {
   let promise = await fetch(
     "http://localhost:3000/api/cameras/" + JSON.parse(item)
   );
   let response = await promise.json();
   return response;
 }
-function convertCents(num) {
+function convertCentSimple(num) {
   let result = num / 100;
   return Math.round(result);
 }
@@ -34,7 +38,7 @@ function lensChoose(elt) {
   return elt.options[elt.selectedIndex].value;
 }
 //========> Crée les élements html du produit
-const createHtmlForProduct = (product) => {
+const createHtmlForItem = (product) => {
   let container = document.createElement("div");
   container.classList.add("col");
 
@@ -78,8 +82,8 @@ const createHtmlForProduct = (product) => {
 
   let euroPrice = document.createElement("button");
   euroPrice.classList.add("btn", "btn-primary", "m-1", "float-right");
-  euroPrice.textContent = convertCents(product.price) + " €";
-  sessionStorage.setItem("price", convertCents(product.price));
+  euroPrice.textContent = convertCentSimple(product.price) + " €";
+  sessionStorage.setItem("price", convertCentSimple(product.price));
   euroPrice.disabled = true;
   cardBody.appendChild(euroPrice);
 
@@ -132,6 +136,9 @@ const createHtmlForProduct = (product) => {
 };
 
 //========> fetch l'article dans l'api
-askCam().then(function (response) {
-  createHtmlForProduct(response);
-});
+function askAndCreateItem() {
+  askCamItem().then(function (response) {
+    createHtmlForItem(response);
+  });
+}
+askAndCreateItem();

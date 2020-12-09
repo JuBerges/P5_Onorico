@@ -1,11 +1,3 @@
-//==============================================<=======ICI==QT================
-//VOIR RESPONSIVE ET MISE EN PAGE
-//W3C CHECK!!!!!!!!! ok pour le moment
-//VOIR LE PLAN TEST
-//COMMENTER LE TOUT
-//==============================================================================
-//==============================================================================
-
 //========> Stocke les ids produits pour post
 let products = [];
 //========> Récup des articles dans sessionStorage
@@ -13,10 +5,13 @@ let cart = JSON.parse(sessionStorage.getItem("cartContent"));
 //========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
 let cartCountMin = document.getElementById("cart-count-min");
-if (sessionStorage.getItem("count")) {
-  cartCount.textContent = sessionStorage.getItem("count");
-  cartCountMin.textContent = sessionStorage.getItem("count");
+function checkCartCount() {
+  if (sessionStorage.getItem("count")) {
+    cartCount.textContent = sessionStorage.getItem("count");
+    cartCountMin.textContent = sessionStorage.getItem("count");
+  }
 }
+checkCartCount();
 //========> Check et mise à jour du panier
 function checkCart() {
   if (!sessionStorage.getItem("cartContent")) {
@@ -132,8 +127,7 @@ const createHtmlForCart = (product) => {
 checkCart();
 
 //========> Vide le panier
-let emptyCart = document.getElementById("emptyCart");
-emptyCart.addEventListener("click", function () {
+function cleanCart() {
   cartCount.textContent = 0;
   cartCountMin.textContent = 0;
   sessionStorage.clear();
@@ -150,12 +144,17 @@ emptyCart.addEventListener("click", function () {
     .getElementById("emptycart_container")
     .removeChild(document.getElementById("emptyCart"));
   checkCart();
-});
+}
+let emptyCart = document.getElementById("emptyCart");
+emptyCart.addEventListener("click", cleanCart());
 
 //========> Fait le total de tout les articles du panier
-if (cart) {
-  totalSum();
+function checkCartForSum() {
+  if (cart) {
+    totalSum();
+  }
 }
+checkCartForSum();
 //========> Validation formulaire
 window.addEventListener(
   "load",
@@ -214,3 +213,10 @@ async function submitOrder() {
   let response = await promise.json();
   return response;
 }
+//==============================================<=======ICI==QT================
+//VOIR RESPONSIVE ET MISE EN PAGE
+//W3C CHECK!!!!!!!!! ok pour le moment
+//FINIR LE PLAN TEST
+//COMMENTER LE HTML AJOUT BALISE?
+//==============================================================================
+//==============================================================================
