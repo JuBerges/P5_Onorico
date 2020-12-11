@@ -18,7 +18,8 @@
     />
   </head>
   <body>
-    <div class="bg-dark">
+    <!--HEADER-->
+    <header class="bg-dark">
       <div class="container">
         <div class="row">
           <nav class="col navbar navbar-expand-md navbar-dark">
@@ -65,14 +66,16 @@
           </nav>
         </div>
       </div>
-    </div>
-    <div class="container">
+    </header>
+    <!--SECTION-->
+    <section class="container">
       <div class="row">
         <div class="col-12">
           <h1 id="cartStatus" class="h3">Contenu de votre panier :</h1>
         </div>
       </div>
-    </div>
+    </section>
+    <!--TABLEAU DE PRODUITS-->
     <div class="container">
       <div id="prod_container" class="row table-responsive">
         <table id="table" class="table table-striped">
@@ -89,8 +92,7 @@
         </table>
       </div>
     </div>
-
-    <!--Container pour le bouton 'vider le panier'-->
+    <!--CONTAINER DU BOUTON'vider le panier'-->
     <div class="container">
       <div class="row">
         <div id="emptycart_container" class="col-6">
@@ -101,12 +103,13 @@
             >Vider le panier</a
           >
         </div>
+        <!--PRIX TOTAL-->
         <div id="total_container" class="col-6">
           <h4 id="total" class="float-right">0 €</h4>
         </div>
       </div>
     </div>
-    <!--Container du formulaire-->
+    <!--FORM-->
     <div class="container">
       <div class="row">
         <div id="form_container" class="col-12">
@@ -185,8 +188,8 @@
         </div>
       </div>
     </div>
-
-    <div class="bg-dark">
+    <!--FOOTER-->
+    <footer class="bg-dark">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -202,9 +205,9 @@
           </div>
         </div>
       </div>
-    </div>
-    <script defer src="./script/cart.js"></script>
+    </footer>
     <!-- Optional JavaScript -->
+    <script defer src="./script/cart.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
