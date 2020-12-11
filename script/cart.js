@@ -1,20 +1,20 @@
 //========> Stocke les ids produits pour post
 let products = [];
-//========> Récup des articles dans sessionStorage
-let cart = JSON.parse(sessionStorage.getItem("cartContent"));
+//========> Récup des articles dans localStorage
+let cart = JSON.parse(localStorage.getItem("cartContent"));
 //========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
 let cartCountMin = document.getElementById("cart-count-min");
 function checkCartCount() {
-  if (sessionStorage.getItem("count")) {
-    cartCount.textContent = sessionStorage.getItem("count");
-    cartCountMin.textContent = sessionStorage.getItem("count");
+  if (localStorage.getItem("count")) {
+    cartCount.textContent = localStorage.getItem("count");
+    cartCountMin.textContent = localStorage.getItem("count");
   }
 }
 checkCartCount();
 //========> Check et mise à jour du panier
 function checkCart() {
-  if (!sessionStorage.getItem("cartContent")) {
+  if (!localStorage.getItem("cartContent")) {
     let cartEmpty = (document.getElementById("cartStatus").textContent =
       "Votre panier est vide");
     cart = null;
@@ -132,7 +132,7 @@ let emptyCart = document.getElementById("emptyCart");
 emptyCart.addEventListener("click", function () {
   cartCount.textContent = 0;
   cartCountMin.textContent = 0;
-  sessionStorage.clear();
+  localStorage.clear();
   document
     .getElementById("prod_container")
     .removeChild(document.getElementById("table"));
@@ -176,9 +176,9 @@ window.addEventListener(
             //========> Actions du btn commander
             submitOrder().then(function (response) {
               console.log(response);
-              sessionStorage.clear();
+              localStorage.clear();
               checkCart();
-              sessionStorage.setItem("orderRep", response.orderId);
+              localStorage.setItem("orderRep", response.orderId);
               document.location = "order.html";
             });
           }

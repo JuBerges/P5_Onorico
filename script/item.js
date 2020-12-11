@@ -2,18 +2,18 @@
 let cartCount = document.getElementById("cart-count");
 let cartCountMin = document.getElementById("cart-count-min");
 function saveCount() {
-  sessionStorage.setItem("count", cartCount.textContent);
+  localStorage.setItem("count", cartCount.textContent);
 }
 function checkCartCount() {
-  if (sessionStorage.getItem("count")) {
-    cartCount.textContent = sessionStorage.getItem("count");
-    cartCountMin.textContent = sessionStorage.getItem("count");
+  if (localStorage.getItem("count")) {
+    cartCount.textContent = localStorage.getItem("count");
+    cartCountMin.textContent = localStorage.getItem("count");
   }
 }
 checkCartCount();
 
 //========> Fetch l'article dans l'api
-let item = sessionStorage.getItem("id");
+let item = localStorage.getItem("id");
 async function askCamItem() {
   let promise = await fetch(
     "http://localhost:3000/api/cameras/" + JSON.parse(item)
@@ -26,13 +26,13 @@ function convertCentSimple(num) {
   let result = num / 100;
   return result;
 }
-//========> Sauvegarde le panier dans sessionStorage
+//========> Sauvegarde le panier dans localStorage
 function saveCart() {
-  sessionStorage.setItem("cartContent", JSON.stringify(cart));
+  localStorage.setItem("cartContent", JSON.stringify(cart));
 }
-//========> Récup le panier dans sessionStorage
+//========> Récup le panier dans localStorage
 function loadCart() {
-  cart = JSON.parse(sessionStorage.getItem("cartContent"));
+  cart = JSON.parse(localStorage.getItem("cartContent"));
 }
 //========> Renvoi l'option choisie du select
 function lensChoose(elt) {
@@ -53,7 +53,7 @@ const createHtmlForItem = (product) => {
   let title = document.createElement("h2");
   title.classList.add("h1");
   title.textContent = product.name;
-  sessionStorage.setItem("name", product.name);
+  localStorage.setItem("name", product.name);
   cardBody.appendChild(title);
 
   let des = document.createElement("p");
@@ -76,10 +76,10 @@ const createHtmlForItem = (product) => {
     (lenseChoice.textContent = elt), i;
     selector.appendChild(lenseChoice);
   });
-  //========> Récup la lentille selectionnée dans sessionStorage
-  sessionStorage.setItem("lens", lensChoose(selector));
+  //========> Récup la lentille selectionnée dans localStorage
+  localStorage.setItem("lens", lensChoose(selector));
   selector.addEventListener("change", function () {
-    sessionStorage.setItem("lens", lensChoose(selector));
+    localStorage.setItem("lens", lensChoose(selector));
   });
 
   let euroPrice = document.createElement("button");
@@ -92,7 +92,7 @@ const createHtmlForItem = (product) => {
     "col-lg-3"
   );
   euroPrice.textContent = convertCentSimple(product.price) + " €";
-  sessionStorage.setItem("price", convertCentSimple(product.price));
+  localStorage.setItem("price", convertCentSimple(product.price));
   euroPrice.disabled = true;
   cardBody.appendChild(euroPrice);
 
@@ -113,21 +113,21 @@ const createHtmlForItem = (product) => {
   img.classList.add("card-img-top");
   img.alt = product.name;
   img.src = product.imageUrl;
-  sessionStorage.setItem("img", product.imageUrl);
+  localStorage.setItem("img", product.imageUrl);
   cardBody.appendChild(img);
   //========> Click Listener pour le bouton d'ajout au panier
   addToCart.addEventListener("click", function () {
     cart = [];
     let obj = {};
     obj.id = JSON.parse(item);
-    obj.name = sessionStorage.getItem("name");
-    obj.lens = sessionStorage.getItem("lens");
-    obj.price = sessionStorage.getItem("price");
+    obj.name = localStorage.getItem("name");
+    obj.lens = localStorage.getItem("lens");
+    obj.price = localStorage.getItem("price");
     obj.quantity = 1;
     cartCount.textContent++;
     cartCountMin.textContent++;
     saveCount();
-    if (sessionStorage.getItem("cartContent") != null) {
+    if (localStorage.getItem("cartContent") != null) {
       loadCart();
       let found = false;
       for (elt of cart) {

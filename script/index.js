@@ -1,4 +1,4 @@
-sessionStorage.removeItem("orderRep");
+localStorage.removeItem("orderRep");
 //========> fetch les articles dans l'api
 async function askCam() {
   let promise = await fetch("http://localhost:3000/api/cameras");
@@ -14,9 +14,9 @@ function convertCents(num) {
 function countArticleInCart() {
   let cartCount = document.getElementById("cart-count");
   let cartCountMin = document.getElementById("cart-count-min");
-  if (sessionStorage.getItem("count")) {
-    cartCount.textContent = sessionStorage.getItem("count");
-    cartCountMin.textContent = sessionStorage.getItem("count");
+  if (localStorage.getItem("count")) {
+    cartCount.textContent = localStorage.getItem("count");
+    cartCountMin.textContent = localStorage.getItem("count");
   }
 }
 countArticleInCart();
@@ -46,7 +46,7 @@ const createHtmlForProduct = (product) => {
   link.role = "button";
   link.href = "item.html";
   link.addEventListener("click", function () {
-    sessionStorage.setItem("id", JSON.stringify(product._id));
+    localStorage.setItem("id", JSON.stringify(product._id));
   });
   link.textContent = convertCents(product.price);
   cardBody.appendChild(link);
