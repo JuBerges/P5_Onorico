@@ -30,6 +30,7 @@ function checkCart() {
     document
       .getElementById("emptycart_container")
       .removeChild(document.getElementById("emptyCart"));
+    document.getElementById("fixfooter").classList.add("fixed-bottom");
     return cartEmpty;
   } else {
     let cartFilled = cart.forEach((product) => {
@@ -144,6 +145,7 @@ emptyCart.addEventListener("click", function () {
   document
     .getElementById("emptycart_container")
     .removeChild(document.getElementById("emptyCart"));
+  document.getElementById("fixfooter").classList.add("fixed-bottom");
   checkCart();
 });
 
@@ -213,9 +215,6 @@ async function submitOrder() {
   let response = await promise.json();
   return response;
 }
-//==============================================<=======ICI==QT================
-//VOIR RESPONSIVE ET MISE EN PAGE
-//W3C CHECK!!!!!!!!! ok pour le moment
-//COMMENTER LE HTML AJOUT BALISE?
-//==============================================================================
-//==============================================================================
+if (!cart) {
+  document.getElementById("fixfooter").classList.add("fixed-bottom");
+}

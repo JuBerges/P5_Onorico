@@ -83,14 +83,28 @@ const createHtmlForItem = (product) => {
   });
 
   let euroPrice = document.createElement("button");
-  euroPrice.classList.add("btn", "btn-primary", "m-1", "float-right");
+  euroPrice.classList.add(
+    "btn",
+    "btn-primary",
+    "m-1",
+    "float-right",
+    "col-6",
+    "col-lg-3"
+  );
   euroPrice.textContent = convertCentSimple(product.price) + " €";
   sessionStorage.setItem("price", convertCentSimple(product.price));
   euroPrice.disabled = true;
   cardBody.appendChild(euroPrice);
 
   let addToCart = document.createElement("button");
-  addToCart.classList.add("btn", "btn-success", "m-1", "float-right");
+  addToCart.classList.add(
+    "btn",
+    "btn-success",
+    "m-1",
+    "float-right",
+    "col-6",
+    "col-lg-3"
+  );
   addToCart.role = "button";
   addToCart.textContent = "Ajouter au panier";
   cardBody.appendChild(addToCart);
