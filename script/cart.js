@@ -177,6 +177,10 @@ window.addEventListener(
             submitOrder().then(function (response) {
               console.log(response);
               localStorage.clear();
+              localStorage.setItem(
+                "totalPrice",
+                document.getElementById("total").textContent
+              );
               checkCart();
               localStorage.setItem("orderRep", response.orderId);
               document.location = "order.html";
