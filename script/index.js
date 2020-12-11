@@ -8,7 +8,7 @@ async function askCam() {
 //========> Pour passer le prix de centimes à euro
 function convertCents(num) {
   let result = num / 100;
-  return Math.round(result).toFixed(2) + " €";
+  return result + " €";
 }
 //========> Compte les articles dans le panier et les affiche sur le header
 function countArticleInCart() {
@@ -60,6 +60,7 @@ function askAndCreate() {
   askCam().then(function (response) {
     response.forEach((product) => {
       createHtmlForProduct(product);
+      console.log(product);
     });
   });
 }

@@ -19,11 +19,12 @@ async function askCamItem() {
     "http://localhost:3000/api/cameras/" + JSON.parse(item)
   );
   let response = await promise.json();
+  console.log(response);
   return response;
 }
 function convertCentSimple(num) {
   let result = num / 100;
-  return Math.round(result);
+  return result;
 }
 //========> Sauvegarde le panier dans sessionStorage
 function saveCart() {
@@ -35,7 +36,8 @@ function loadCart() {
 }
 //========> Renvoi l'option choisie du select
 function lensChoose(elt) {
-  return elt.options[elt.selectedIndex].value;
+  let result = elt.options[elt.selectedIndex].value;
+  return result;
 }
 //========> Crée les élements html du produit
 const createHtmlForItem = (product) => {

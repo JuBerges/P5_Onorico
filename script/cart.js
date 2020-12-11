@@ -127,7 +127,8 @@ const createHtmlForCart = (product) => {
 checkCart();
 
 //========> Vide le panier
-function cleanCart() {
+let emptyCart = document.getElementById("emptyCart");
+emptyCart.addEventListener("click", function () {
   cartCount.textContent = 0;
   cartCountMin.textContent = 0;
   sessionStorage.clear();
@@ -144,15 +145,14 @@ function cleanCart() {
     .getElementById("emptycart_container")
     .removeChild(document.getElementById("emptyCart"));
   checkCart();
-}
-let emptyCart = document.getElementById("emptyCart");
-emptyCart.addEventListener("click", cleanCart());
+});
 
 //========> Fait le total de tout les articles du panier
 function checkCartForSum() {
   if (cart) {
     totalSum();
   }
+  console.log(cart);
 }
 checkCartForSum();
 //========> Validation formulaire
@@ -216,7 +216,6 @@ async function submitOrder() {
 //==============================================<=======ICI==QT================
 //VOIR RESPONSIVE ET MISE EN PAGE
 //W3C CHECK!!!!!!!!! ok pour le moment
-//FINIR LE PLAN TEST
 //COMMENTER LE HTML AJOUT BALISE?
 //==============================================================================
 //==============================================================================
