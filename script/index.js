@@ -1,7 +1,9 @@
 localStorage.removeItem("orderRep");
+const apiUrl = "http://localhost:3000/api/cameras";
+
 //========> fetch les articles dans l'api
 async function askCam() {
-  let promise = await fetch("http://localhost:3000/api/cameras");
+  let promise = await fetch(apiUrl);
   let response = await promise.json();
   return response;
 }

@@ -72,6 +72,7 @@ const createHtmlForCart = (product) => {
   let tdQuantity = document.createElement("td");
   let spanQuantity = document.createElement("span");
   spanQuantity.textContent = product.quantity;
+  spanQuantity.classList.add("pr-1");
   tdQuantity.appendChild(spanQuantity);
 
   //========> Pour diminuer la quantité
