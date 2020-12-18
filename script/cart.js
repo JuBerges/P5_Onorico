@@ -1,10 +1,19 @@
+/*       
+========>|=================================|<========
+========>|---FONCTIONS DE LA PAGE PANIER---|<========
+========>|=================================|<========
+*/
+
 //========> Stocke les ids produits pour post
 let products = [];
+
 //========> Récup des articles dans localStorage
 let cart = JSON.parse(localStorage.getItem("cartContent"));
+
 //========> Compte des articles dans le panier sur le header
 let cartCount = document.getElementById("cart-count");
 let cartCountMin = document.getElementById("cart-count-min");
+
 function checkCartCount() {
   if (localStorage.getItem("count")) {
     cartCount.textContent = localStorage.getItem("count");
@@ -12,6 +21,7 @@ function checkCartCount() {
   }
 }
 checkCartCount();
+
 //========> Check et mise à jour du panier
 function checkCart() {
   if (!localStorage.getItem("cartContent")) {
@@ -40,6 +50,7 @@ function checkCart() {
     return cartFilled;
   }
 }
+
 //========> Calcul du total des articles
 const totalSum = () => {
   let total = 0;
@@ -52,6 +63,7 @@ const totalSum = () => {
   let sumOfAll = document.getElementById("total");
   sumOfAll.textContent = "Prix Total : " + total + " €";
 };
+
 //========> Créer le contenu du panier sur la page pour chaque article
 const createHtmlForCart = (product) => {
   let tbody = document.getElementById("prod");
@@ -98,6 +110,7 @@ const createHtmlForCart = (product) => {
       e.target.closest("tr").remove();
     }
   });
+
   //========> Pour augmenter la quantité
   let qtPlus = document.createElement("button");
   qtPlus.classList.add("btn", "btn-sm", "btn-dark");
@@ -130,6 +143,7 @@ checkCart();
 
 //========> Vide le panier
 let emptyCart = document.getElementById("emptyCart");
+
 emptyCart.addEventListener("click", function () {
   cartCount.textContent = 0;
   cartCountMin.textContent = 0;
@@ -158,6 +172,7 @@ function checkCartForSum() {
   console.log(cart);
 }
 checkCartForSum();
+
 //========> Validation formulaire
 window.addEventListener(
   "load",
@@ -195,6 +210,7 @@ window.addEventListener(
   },
   false
 );
+
 //========> fetch(post) le panier et formulaire validé
 async function submitOrder() {
   //========> Crée l'objet contact pour post
@@ -220,6 +236,8 @@ async function submitOrder() {
   let response = await promise.json();
   return response;
 }
+
+//========> Fixe le footer si le panier est vide
 if (!cart) {
   document.getElementById("fixfooter").classList.add("fixed-bottom");
 }

@@ -1,3 +1,10 @@
+/*        
+========>|====================================|<========
+========>|---FONCTIONS DE LA PAGE D'ACCUEIL---|<========
+========>|====================================|<========
+*/
+
+//========> Supprime les données de la dernière commande finalisée
 localStorage.removeItem("orderRep");
 const apiUrl = "http://localhost:3000/api/cameras";
 
@@ -7,11 +14,13 @@ async function askCam() {
   let response = await promise.json();
   return response;
 }
+
 //========> Pour passer le prix de centimes à euro
 function convertCents(num) {
   let result = num / 100;
   return result + " €";
 }
+
 //========> Compte les articles dans le panier et les affiche sur le header
 function countArticleInCart() {
   let cartCount = document.getElementById("cart-count");

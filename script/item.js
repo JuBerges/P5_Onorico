@@ -1,6 +1,13 @@
+/*       
+========>|==================================|<========
+========>|---FONCTIONS DE LA PAGE PRODUIT---|<========
+========>|==================================|<========
+*/
+
 //========> Compte des articles dans le panier sur le header
-let cartCount = document.getElementById("cart-count");
-let cartCountMin = document.getElementById("cart-count-min");
+const cartCount = document.getElementById("cart-count");
+const cartCountMin = document.getElementById("cart-count-min");
+
 function saveCount() {
   localStorage.setItem("count", cartCount.textContent);
 }
@@ -13,12 +20,13 @@ function checkCartCount() {
 checkCartCount();
 
 //========> Fetch l'article dans l'api
-let item = localStorage.getItem("id");
+const item = localStorage.getItem("id");
+
 async function askCamItem() {
-  let promise = await fetch(
+  const promise = await fetch(
     "http://localhost:3000/api/cameras/" + JSON.parse(item)
   );
-  let response = await promise.json();
+  const response = await promise.json();
   console.log(response);
   return response;
 }
@@ -26,19 +34,23 @@ function convertCentSimple(num) {
   let result = num / 100;
   return result;
 }
+
 //========> Sauvegarde le panier dans localStorage
 function saveCart() {
   localStorage.setItem("cartContent", JSON.stringify(cart));
 }
+
 //========> Récup le panier dans localStorage
 function loadCart() {
   cart = JSON.parse(localStorage.getItem("cartContent"));
 }
+
 //========> Renvoi l'option choisie du select
 function lensChoose(elt) {
   let result = elt.options[elt.selectedIndex].value;
   return result;
 }
+
 //========> Crée les élements html du produit
 const createHtmlForItem = (product) => {
   let container = document.createElement("div");
@@ -70,12 +82,14 @@ const createHtmlForItem = (product) => {
   selector.id = "choices";
   selector.classList.add("selectpicker");
   cardBody.appendChild(selector);
+
   //========> boucle pour lentilles
   product.lenses.forEach((elt, i) => {
     let lenseChoice = document.createElement("option");
     (lenseChoice.textContent = elt), i;
     selector.appendChild(lenseChoice);
   });
+
   //========> Récup la lentille selectionnée dans localStorage
   localStorage.setItem("lens", lensChoose(selector));
   selector.addEventListener("change", function () {
