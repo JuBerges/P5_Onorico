@@ -56,6 +56,7 @@ const createHtmlForProduct = (product) => {
   link.classList.add("btn", "btn-primary", "stretched-link");
   link.role = "button";
   link.href = "item.html";
+  //=======> Stocke l'id du produit selectionné dans localStorage
   link.addEventListener("click", function () {
     localStorage.setItem("id", JSON.stringify(product._id));
   });
